@@ -121,6 +121,7 @@ Bengali_NER/
     └── preprocessing.py
 ├── train.py
 ├── test.py
+├── script.py
 ├── resume_classification.ipynb
 └── requirements.txt
 
@@ -130,12 +131,10 @@ Bengali_NER/
 
 * `helper.py`: Contains all the helping functions for training and testing
 * `preprocessing.py`: Contains all the helper function for data pre-processing.<br>
-
-* `inference_utils.py`: Contains all the helper function for prediction and post-processing.<br>
 * `train.py`: Script for training and run training.<br>
-* `testing.py`: Script for run testing. <br>
+* `test.py`: Script for run testing. <br>
 * `requirements.txt`: All required module list.
-* `resume_classification.ipynb`: All code are combined in one jupyter notebook to run interactively.
+* `resume-classification.ipynb`: All code are combined in one jupyter notebook to run interactively.
 
 
  ### Setup
@@ -188,7 +187,7 @@ To see list of all available options, do `python test.py -h`
 > If you want to run test on already trained model, please run the following command for d
 
 ```bash
-$ python testing.py \
+$ python test.py \
     --model_name "bert-base-uncased" \
     --model_checkpoint "./Models/bert_base/Resume_Classification-0.bin" \
     --test_batch_size 2 \
@@ -197,6 +196,12 @@ $ python testing.py \
 
 N.B: To run with proper weights and proper model name please follow the following format.
 
+#### Run script.py
+
+```bash
+$ python script.py \
+    --resume_dir <dir of the resume pdf files> \
+```
 
 #### N.B: Please adjust certain commands if you are running these in windows or MacOS
 
@@ -227,7 +232,7 @@ Run the following commands to evaluate the whole process.
 
 #Testing
 # please provide accurate model_name and its corresponding model_checkpoint correctly
-$ python testing.py \
+$ python test.py \
     --model_name "bert-base-uncased" \
     --model_checkpoint "./Models/bert_base/Resume_Classification-0.bin" \
     --test_batch_size 2 \
