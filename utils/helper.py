@@ -2,7 +2,7 @@
 
 ############################## 
 #imports
-
+import time
 import os
 import random
 import gc
@@ -11,6 +11,8 @@ import pandas as pd
 from tqdm import tqdm
 import copy
 from dotmap import DotMap
+import string
+from collections import defaultdict
 
 import torch
 import torch.optim as optim 
@@ -330,6 +332,65 @@ def valid_one_epoch(model, dataloader, epoch, device):
     
     return epoch_loss, f1score, accuracy
 
+################################################
+def training_loop(model, train_loader, valid_loader, optimizer, scheduler, fold, num_epochs, cfg= CONFIG, patience= 3):
+
+    if torch.cuda.is_available():
+        print("Training with GPU\n")
+    else:
+        print("Training with CPU \n")
+    
+    start= time.time()
+    best_score= - np.inf
+    trigger_times= 0 # for early stoping
+    
+    history= defaultdict(list)
+
+    for epoch in range(1, num_epochs + 1):
+
+        train_epoch_loss= train_one_epoch(model, optimizer, scheduler, dataloader= train_loader, epoch= epoch, device= cfg.device)
+        val_epoch_loss, f1score, accuracy= valid_one_epoch(model, valid_loader, epoch= epoch, device= cfg.device)
+        
+        history['train_loss'].append(train_epoch_loss)
+        history['valid_loss'].append(val_epoch_loss)
+        history['F1_score'].append(f1score)
+        history['Accuracy'].append(accuracy)
+
+
+        if f1score >= best_score:
+            
+            trigger_times= 0 #for early stop
+            print(f"Validation Score Improved ({best_score :.4f} ---> {f1score :.4f})")
+            print(f"Validation Accuracy: {accuracy :.4f}")
+            
+            best_score= f1score
+
+            # copy and save model
+            best_model_wts= copy.deepcopy(model.state_dict())
+            PATH= f"Resume_Classification_fold-{fold}.bin"
+            torch.save(model.state_dict(), PATH)
+            print(f"Model Saved to {PATH}")
+        
+        else:
+            trigger_times += 1
+            
+            if trigger_times >= patience:
+                print("Early stoping \n")
+                break
+        
+    end= time.time()
+    time_elapsed= end - start
+    print('Training complete in {:.0f}h {:.0f}m {:.0f}s'.format(
+        time_elapsed // 3600, (time_elapsed % 3600) // 60, (time_elapsed % 3600) % 60))
+    
+    print(f"Best F1 Score: {best_score:.4f}")
+    
+    # load best model weights
+    model.load_state_dict(best_model_wts)
+
+
+    return model, history, best_score, accuracy
+
 def testing_loop(model, dataloader, device):
     model.eval()
     
@@ -343,14 +404,13 @@ def testing_loop(model, dataloader, device):
         masks= data["attention_mask"].to(device, dtype= torch.long)
         targets= data["targets"].to(device, dtype= torch.long)
         
-        batch_size= ids.size(0)
-        
         with torch.no_grad():
             outputs= model(ids, masks)
-
-        preds.append(outputs.argmax(axis=1).to('cpu').numpy())
-        labels.append(targets.to('cpu').numpy())
-        bar.set_postfix(F1_score= get_score(np.concatenate(labels), np.concatenate(preds)))
+            score= get_score(np.concatenate(labels), np.concatenate(preds))
+            preds.append(outputs.argmax(axis=1).to('cpu').numpy())
+            labels.append(targets.to('cpu').numpy())
+        
+        bar.set_postfix(F1_score= score )
 
     predictions= np.concatenate(preds)
     true_labels= np.concatenate(labels)

@@ -22,10 +22,13 @@ class CONFIG:
     n_folds= 3
     num_epochs= 50
     
-    output_dir= "./Models/"
-    model_name_or_path= "microsoft/deberta-v3-base" #"xlnet-base-cased" #"microsoft/deberta-v3-base" # "microsoft/deberta-v3-small" #"bert-large-uncased" #"bert-base-uncased" # #"bert-base-uncased" # #"prajjwal1/bert-small"
-    model_checkpoint= "./Models/Resume_classification_fold_0.bin" # This have to be changed with proper path
-    token_max_length= 1024 #512 # 1024 #bert-base-uncased must be run with 512 length
+    data_path= "data/Resume.csv"
+    train_data_path= "data/train_data.csv"
+    test_data_path= "data/test_data.csv"
+    output_dir= "Models/"
+    model_name_or_path= "bert-base-uncased" #"microsoft/deberta-v3-base" #"xlnet-base-cased" #"microsoft/deberta-v3-base" # "microsoft/deberta-v3-small" #"bert-large-uncased" #"bert-base-uncased" # #"bert-base-uncased" # #"prajjwal1/bert-small"
+    model_checkpoint= "Models/bert_base/Resume_Classification-0.bin" # This have to be changed with proper path
+    token_max_length= 512 #512 # 1024 #bert-base-uncased must be run with 512 length
     train_batch_size= 4
     valid_batch_size= 4
     test_batch_size= 4
