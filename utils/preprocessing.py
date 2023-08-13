@@ -1,7 +1,8 @@
-
+import os
 from tqdm import tqdm
 import re
-
+import pandas as pd
+import PyPDF2
 import nltk
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize as word_tokenizer
@@ -13,6 +14,30 @@ stop_words = set(stopwords.words('english'))
 
 important_punctuations= [p for p in "()-.:;?/_{|}"]
 important_punctuations
+
+def extract_text_from_file(pdf_path):
+    with open(pdf_path, 'rb') as pdf_file:
+        pdf_reader = PyPDF2.PdfReader(pdf_file)
+        text = ''
+        for page_num in range(len(pdf_reader.pages)):
+            page =pdf_reader.pages[page_num]
+            text += page.extract_text()
+        return text
+    
+def load_file(path):
+    """Reads all the files and makes dataframe
+    """
+    pdf_files = [file for file in os.listdir(path) if file.endswith('.pdf')]
+    data = []
+    for pdf_file in pdf_files:
+        pdf_path = os.path.join(path, pdf_file)
+        text = extract_text_from_file(pdf_path)
+        data.append({'ID': pdf_file, 'Resume_str': text})
+    
+    df = pd.DataFrame(data)
+    df.to_csv('resume_data_from_pdf.csv', index=False)
+    print("Resumes data saved to 'resume_data_from_pdf.csv'") 
+    return df   
 
 def remove_stop_words(txt):
     print(f"Total stop words: {len(stop_words)}")

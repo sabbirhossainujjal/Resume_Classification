@@ -13,7 +13,7 @@ from utils.preprocessing import *
 
 def main():
 
-    parser= argparse.ArgumentParser(description= "Training Resume Classification")
+    parser= argparse.ArgumentParser(description= "Testing Resume Classification")
     parser.add_argument("--test_data_path", type= str, default= CONFIG.test_data_path, help= "Path of the test csv")
     parser.add_argument("--model_name", type= str, default= CONFIG.model_name_or_path, \
                         help="Provide a valid huggingface language model for tokne classification")
