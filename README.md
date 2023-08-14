@@ -103,8 +103,7 @@ These models was chosen because of their amazing performance in different NLP ta
 | xlnet-base-cased      |      1024                       | 85.5       |
 
 
-
-
+N.B: All the trained weights will be found in this [dataset](https://kaggle.com/datasets/dab8d679eff868203dbfdb4009744c496b1cfee01b8bbb8ef97e783eb7cf650d)
 ### Running Scripts for training and Inference
 
 #### Directory Introduction
@@ -161,7 +160,6 @@ To see list of all available options, do `python train.py -h`. There are two way
 
 #### Finetuning
 For finetuning, a minimal example is as follows:<br>
-[The following command snipet will run the script in debugging mode. To run full training set --debug False]
 
 ```bash
 $ python train.py \
@@ -177,7 +175,7 @@ $ python train.py \
 ```
 
 #### Downloading Trained Weights
-Some of the experimented weights are resides in this [drive](https://drive.google.com/drive/folders/1w77dXj9IzI7Ai-9trj3wxRnfSKDg9ZDH?usp=sharing) . Please download these weights files and put them into a folder named `Models`. <br>
+N.B: All the trained weights will be found in this [dataset](https://kaggle.com/datasets/dab8d679eff868203dbfdb4009744c496b1cfee01b8bbb8ef97e783eb7cf650d) . Please download these weights files and put them into a folder named `Models`. <br>
 
 ### Testing
 This script run testing on test dataset and returns model prformance (f1_score).<br>
