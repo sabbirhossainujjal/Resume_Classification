@@ -17,7 +17,7 @@ from utils.preprocessing import *
 ###################################
 set_seed(seed= 42)
 
-device= torch.device("cuda" if torch.cuda.is_available else 'cpu')
+device= torch.device("cuda" if torch.cuda.is_available( else 'cpu')
 CONFIG.device= device
 
 parser= argparse.ArgumentParser(description= "Resume Classification")
@@ -40,7 +40,7 @@ predictions= []
 for resume in tqdm(resumes):
     inp= tokenizer(resume, return_token_type_ids= False, truncation= True, max_length= CONFIG.token_max_length, return_tensors= "pt")
     pred= model(**inp).argmax(axis=1).to('cpu').numpy()[0]
-    predictions.append(str(CONFIG.id2label[pred]))
+    predictions.append(str(CONFIG.id2label[str(pred)]))
 
 test_df["Predictions"]= predictions
 
