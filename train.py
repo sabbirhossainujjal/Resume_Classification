@@ -37,7 +37,7 @@ def main():
 
     #loading datasets
     data_df= pd.read_csv(CONFIG.data_path)
-    data_df['labels']= data_df['Category'].apply(lambda x: int(CONFIG.label2id(x)))
+    data_df['labels']= data_df['Category'].apply(lambda x: int(CONFIG.label2id[x]))
     ## Cross validation kfold data of the dataset
     data_df= do_cv_split(data_df= data_df)
     train_df, test_df= do_train_test_split(data_df= data_df)
