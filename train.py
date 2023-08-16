@@ -22,7 +22,7 @@ def main():
     parser.add_argument("--learning_rate", type= float, default= CONFIG.learning_rate, help= "Initial Learning Rate")
     parser.add_argument("--scheduler", type= str, default= CONFIG.scheduler, help="Learning rate scheduler.",
                         choices=["CosineAnnealingWarmRestarts", "CosineAnnealingLR", "linear"])
-    parser.add_argument("--max_length", type= int, default= CONFIG.max_length, help= "Maximum sequence length.")
+    parser.add_argument("--max_length", type= int, default= CONFIG.token_max_length, help= "Maximum sequence length.")
     
     args = parser.parse_args()
     CONFIG.model_name_or_path= args.model_name
@@ -33,7 +33,7 @@ def main():
     CONFIG.valid_batch_size= args.valid_batch_size
     CONFIG.learning_rate= args.learning_rate
     CONFIG.scheduler= args.scheduler
-    CONFIG.max_length= args.max_length
+    CONFIG.token_max_length= args.max_length
 
     #loading datasets
 
