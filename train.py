@@ -36,8 +36,8 @@ def main():
     CONFIG.token_max_length= args.max_length
 
     #loading datasets
-
-
+    data_df= pd.read_csv(CONFIG.data_path)
+    
     ## Cross validation kfold data of the dataset
     data_df= do_cv_split(data_df= data_df)
     train_df, test_df= do_train_test_split(data_df= data_df)
