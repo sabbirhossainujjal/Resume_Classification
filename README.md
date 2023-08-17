@@ -66,19 +66,23 @@ For train-validation split, I have used `stratifiedkfold` from `sklearn`. Here I
 #### Models
 For modeling we tried several methods, <br>
 First of all we tried a niave approach<br>
+
+
 **A naive approach** <br>
 If someone apply for a certain post, his/her resume will contain more of this position related word. So we will count the occurance of each category words and classify the resume according to the frequency of category occurance.
 
 > This approach result is much better (Accuracy `53.09%` without stopwords and `55.31%` with stopwords) than a random classifier.
 
+
+**ML based approach**<br>
 Then we tried a traditional ML based methods. We trained a KNN model for our task and got following results <br>
 
 > Result: Train Acc- 0.6414<br>
           Test Acc-  0.5330
 
-So, Traditional ML model doesn't do well for our task. 
+So, Traditional ML model doesn't do well for our task. <br>
 
-
+**DL based approach**<br>
 Then we tried different deep-learning based model. After the introduction of `transformer` based model there is an huge shift in NLP domain. In every NLP task transformer based model outperforms previous architectures like RNN,LSTM etc. Thats we tried out different transformer based models for the task. There are the lists that was used for experiments for the task.
 
 * [bert-base-uncased](https://huggingface.co/bert-base-uncased)
