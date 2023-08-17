@@ -23,7 +23,7 @@ Design, implement, and train a machine learning model to automatically categoriz
 
 
 ### Solution Approach
-
+Please follow this [notebook](/resume-classification.ipynb) for details solution approach [EDA, Training, Testing]
 
  ##### N.B: Coding is done in `python` and `pytorch` was used as ML framework.
 
