@@ -23,7 +23,7 @@ Design, implement, and train a machine learning model to automatically categoriz
 
 
 ### Solution Approach
-Please follow this [notebook](/resume-classification.ipynb) for details solution approach [EDA, Training, Testing]
+Please follow this [notebook](/Resume_Classification.ipynb) for details solution approach [EDA, Training, Testing]
 
  ##### N.B: Coding is done in `python` and `pytorch` was used as ML framework.
 
@@ -55,7 +55,7 @@ There are `2484` resumes in total in the dataset. The dataset is small in size. 
 #### Exploratory Data Analysis (EDA)
 After loading our data, we did some data analysis. First, we check if all the data distribution for each class. After analysis we found that the dataset was slightly imbalanced which point us some constrains for the task, like proper train-test split and proper metrics for evaluation. For our task we have chosen `cross-validation `method for robust model training and `f1_score` as model performance metrics as it gives more general idea that accuracy
 
-We also did other extensive EDA which can be found in this [notebook](./task-resume-classification.ipynb)
+We also did other extensive EDA which can be found in this [notebook](./Resume_Classification.ipynb)
 
 #### Train-validation split
 For train-validation split, I have used `stratifiedkfold` from `sklearn`. Here I used this split method so that our train valid dataset have properly distributed samples from each class .We have done most of the experimented with 3 fold cross-validation to ensure models robustness. We splited total data into 4 folds and take 1 fold as test data and did 3 fold cv with other 3 folds.
@@ -137,7 +137,7 @@ Bengali_NER/
 * `train.py`: Script for training and run training.<br>
 * `test.py`: Script for run testing. <br>
 * `requirements.txt`: All required module list.
-* `resume-classification.ipynb`: All code are combined in one jupyter notebook to run interactively.
+* `Resume_Classification.ipynb`: All code are combined in one jupyter notebook to run interactively.
 
 
  ### Setup
@@ -186,7 +186,7 @@ This script run testing on test dataset and returns model prformance (f1_score).
 
 To see list of all available options, do `python test.py -h`
 
-> If you want to run test on already trained model, please run the following command for d
+> If you want to run test on already trained model, please run the following commands.
 
 ```bash
 $ python test.py \
@@ -203,6 +203,7 @@ N.B: To run with proper weights and proper model name please follow the followin
 ```bash
 $ python script.py \
     --resume_dir <dir of the resume pdf files> \
+    --output_dir <dir for storing categorized resumes>
 ```
 
 #### N.B: Please adjust certain commands if you are running these in windows or MacOS
