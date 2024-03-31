@@ -5,8 +5,7 @@ A deep-learning based project for Resume Classification
 ## Table of Contents
 - [Resume_Classification](#resume-classification)
   - [Table of Contents](#table-of-contents)
-  - [Problem Statement](#problem-statement)
-  - [Solution Approach](#solution-approach)
+  - [Problem Statement](#goal-of-the-project)
   - [Datasets](#datasets)
   - [Preprocessing](#preprocessing)
   - [Modeling](#modeling)
@@ -16,13 +15,9 @@ A deep-learning based project for Resume Classification
   - [Testing](#testing)
   - [Run in Colab](#commands-to-run-in-colab)
 
-### Problem Statement
-Design, implement, and train a machine learning model to automatically categorize resumes based on their domain (e.g., sales, marketing, etc.).
+### Goal of the project
+Design, implement, and train a machine learning model to automatically categorize resumes based on their domain (e.g., sales, marketing, etc.).<br>
 
-
-
-
-### Solution Approach
 Please follow this [notebook](/Resume_Classification.ipynb) for details solution approach [EDA, Training, Testing]
 
  ##### N.B: Coding is done in `python` and `pytorch` was used as ML framework.
